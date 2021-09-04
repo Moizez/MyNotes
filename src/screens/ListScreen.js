@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
 
 import Note from '../components/Note'
+import EmptyList from '../components/EmptyList';
 
 const ListScreen = () => {
 
@@ -14,15 +15,15 @@ const ListScreen = () => {
         navigation.setOptions({
             title: 'Minhas Notas',
             headerRight: () => (
-                <AddButton onPress={() => navigation.navigate('EditNote')}>
+                <AddButton underlayColor='transparent' onPress={() => navigation.navigate('EditNote')}>
                     <AddImage source={require('../assets/images/more.png')} />
                 </AddButton>
             )
         })
     }, [])
 
-    const handleNotePress = () => {
-
+    const handleNotePress = (index) => {
+        navigation.navigate('EditNote', { key: index })
     }
 
     return (
@@ -31,14 +32,15 @@ const ListScreen = () => {
                 data={list}
                 renderItem={({ item, index }) => <Note data={item} index={index} onPress={handleNotePress} />}
                 keyExtractor={index => index.toString()}
+                ListEmptyComponent={<EmptyList />}
             />
         </Container>
     );
 }
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
     flex: 1;
-    background-color: #DDD;
+    background-color: #666;
     justify-content: center;
     align-items: center;
 `;

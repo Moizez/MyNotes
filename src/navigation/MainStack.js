@@ -10,8 +10,9 @@ const MainStack = () => {
     return (
         <Stack.Navigator screenOptions={{
             headerStyle: {
-                backgroundColor: '#333',
+                backgroundColor: '#264653',
             },
+            headerTitleAlign: 'center',
             headerTintColor: '#FFF'
         }}>
             <Stack.Screen name='List' component={ListScreen} />
